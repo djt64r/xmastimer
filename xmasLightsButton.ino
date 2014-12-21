@@ -37,3 +37,51 @@ void loop()
   
   delay(offTime);            
 }
+
+//************************************************************************************************************//
+
+int buttonClick()  //takes input from button click, counts up in hours (from 1) for each click and...
+                   //waits for startButton to be pressed to start the timer.//
+{
+  boolean currentButton;
+  boolean lastButton;
+  int clickCtr = 1;  //starts with 1 button click at startup, aka 1 hour for timer//
+  
+  do
+  {
+    currentButton = debounce(lastButton);
+  
+    if (lastButton == LOW && currentButton == HIGH)
+      {
+        clickCtr++;
+      } 
+    lastButton = currentButton;
+    
+    if (clickCtr >= 24) //prevents one from exceeding maximum hours in a day on the the planet Earth//
+        {
+          clickCtr = 1;
+        }
+  }
+  while (digitalRead(startButton) == LOW); //while the start button is not pressed, waits for the user input above.//
+  
+  
+  
+  return clickCtr;  
+}
+
+//************************************************************************//
+
+boolean debounce(boolean last)  //debounces the hour increment button connected to hourPin//
+{
+ boolean current = digitalRead(hourPin);
+  if (last != current)
+  {
+   delay(5);
+  current = digitalRead(hourPin);
+  }
+  return current; 
+}
+
+
+
+  
