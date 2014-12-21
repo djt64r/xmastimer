@@ -79,8 +79,6 @@ int buttonClick()  //takes input from button click, counts up in hours (from 1) 
   }
   while (digitalRead(startButton) == LOW); //while the start button is not pressed, waits for the user input above.//
   
-  
-  
   return clickCtr;  
 }
 
